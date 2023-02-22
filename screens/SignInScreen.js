@@ -19,9 +19,9 @@ const styles = {
     container: `flex-1 bg-[#009387] `,
     header: `flex-1 justify-end p-5 t.pB12`,
     headerText: `text-[#fff] font-bold text-[30px]`,
-    footer: `flex-[3] bg-[#fff] rounded-tl-[30px] rounded-tr-[30px] `,
+    footer: `flex-[3] bg-[#fff] rounded-tl-[30px] rounded-tr-[30px]`,
     footerText: `text-[#05375a] text-[18px]`,
-    action: `flex-row mt-[10px] border-b-w-[1px] border-b-[#f2f2f2] pb-[5px]`,
+    action: `flex-row mt-[10px] border-b-[#f2f2f2] pb-[5px]`,
     actionError: `flex-row mt-[10px] border-b-w-[1px] border-b-[#FF0000] pb-[5px]`,
     textInput: `flex-1 mt-[${
         Platform.OS === "ios" ? 0 : -12
@@ -37,6 +37,7 @@ const styles = {
 const SignInScreen = function () {
     const { colors } = useTheme();
     const navigation = useNavigation();
+
     useLayoutEffect(() => {
         navigation.setOptions({
             headerShown: false,
@@ -82,7 +83,7 @@ const SignInScreen = function () {
             setData({
                 ...data,
                 password: value,
-                isValidPassword,
+                isValidPassword: true,
             });
         } else {
             setData({
@@ -124,7 +125,7 @@ const SignInScreen = function () {
                     }}
                     className={styles.footer}
                 >
-                    <Text className={styles.footerText}>Username</Text>
+                    <Text className={styles.footerText}>Gmail</Text>
                     <View className={styles.action}>
                         <FontAwesome
                             name="user-o"
@@ -132,12 +133,35 @@ const SignInScreen = function () {
                             size={20}
                         />
                         <TextInput
-                            placeholder="Your Username"
+                            placeholder="Your Email"
                             placeholderTextColor="#666666"
                             className={styles.textInput}
                             autoCapitalize="none"
+                            onChangeText={(value) =>
+                                handleTextInputChange(value)
+                            }
+                            onEndEditing={(e) =>
+                                handleValidUser(e.nativeEvent.text)
+                            }
                         />
+                        {data.checkTextInputChange ? (
+                            <Animatable.View animation="bounceIn">
+                                <Feather
+                                    name="check-circle"
+                                    color="green"
+                                    size={20}
+                                />
+                            </Animatable.View>
+                        ) : null}
                     </View>
+
+                    {data.isValidUser ? null : (
+                        <Animatable.View animation="fadeInLeft" duration={500}>
+                            <Text className={styles.errorMessage}>
+                                Gmail must be characters long.
+                            </Text>
+                        </Animatable.View>
+                    )}
                     <Text className={styles.footerText}>Password</Text>
                     <View className={styles.action}>
                         <Feather name="lock" color={colors.text} size={20} />
@@ -145,7 +169,11 @@ const SignInScreen = function () {
                             placeholder="Your Password"
                             placeholderTextColor="#666666"
                             className={styles.textInput}
+                            secureTextEntry={data.secureTextEntry}
                             autoCapitalize="none"
+                            onChangeText={(value) =>
+                                handlePasswordChange(value)
+                            }
                         />
                         <TouchableOpacity onPress={updateSecureTextEntry}>
                             {data.secureTextEntry ? (
@@ -159,13 +187,25 @@ const SignInScreen = function () {
                             )}
                         </TouchableOpacity>
                     </View>
+                    {data.isValidPassword ? null : (
+                        <Animatable.View animation="fadeInLeft" duration={500}>
+                            <Text className={styles.errorMessage}>
+                                Password must be 8 characters long.
+                            </Text>
+                        </Animatable.View>
+                    )}
                     <TouchableOpacity>
                         <Text style={{ color: "#009387", marginTop: 15 }}>
                             Forgot password?
                         </Text>
                     </TouchableOpacity>
                     <View className={styles.button}>
-                        <TouchableOpacity className={styles.signIn}>
+                        <TouchableOpacity
+                            onPress={() => {
+                                handleLogin(data.username, data.password);
+                            }}
+                            className={styles.signIn}
+                        >
                             <View className={styles.signIn}>
                                 <Text className={styles.textSign}>Sign In</Text>
                             </View>
