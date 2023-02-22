@@ -7,7 +7,6 @@ import {
     Dimensions,
     TextInput,
     Platform,
-    StyleSheet,
     ScrollView,
     StatusBar,
     SafeAreaView,
@@ -118,7 +117,15 @@ const SignUpScreen = function ({}) {
                 >
                     <ScrollView>
                         <Text className={styles.footerText}>Username</Text>
-                        <View className={styles.action}>
+                        <View
+                            className={styles.action}
+                            style={{
+                                marginTop: 10,
+                                borderBottomWidth: 1,
+                                borderBottomColor: "#f2f2f2",
+                                paddingBottom: 5,
+                            }}
+                        >
                             <FontAwesome
                                 name="user-o"
                                 color="#05375a"
@@ -127,6 +134,10 @@ const SignUpScreen = function ({}) {
                             <TextInput
                                 placeholder="Your Username"
                                 className={styles.textInput}
+                                style={{
+                                    paddingLeft: 10,
+                                    marginTop: Platform.OS === "ios" ? 0 : -12,
+                                }}
                                 autoCapitalize="none"
                                 onChangeText={(val) =>
                                     handleTextInputChange(val)
@@ -143,7 +154,15 @@ const SignUpScreen = function ({}) {
                             ) : null}
                         </View>
                         <Text className={styles.footerText}>Password</Text>
-                        <View className={styles.action}>
+                        <View
+                            className={styles.action}
+                            style={{
+                                marginTop: 10,
+                                borderBottomWidth: 1,
+                                borderBottomColor: "#f2f2f2",
+                                paddingBottom: 5,
+                            }}
+                        >
                             <FontAwesome
                                 name="lock"
                                 color="#05375a"
@@ -152,6 +171,10 @@ const SignUpScreen = function ({}) {
                             <TextInput
                                 placeholder="Your Password"
                                 className={styles.textInput}
+                                style={{
+                                    paddingLeft: 10,
+                                    marginTop: Platform.OS === "ios" ? 0 : -12,
+                                }}
                                 secureTextEntry={
                                     data.secureTextEntry ? true : false
                                 }
@@ -177,7 +200,15 @@ const SignUpScreen = function ({}) {
                         <Text className={styles.footerText}>
                             Confirm Password
                         </Text>
-                        <View className={styles.action}>
+                        <View
+                            className={styles.action}
+                            style={{
+                                marginTop: 10,
+                                borderBottomWidth: 1,
+                                borderBottomColor: "#f2f2f2",
+                                paddingBottom: 5,
+                            }}
+                        >
                             <FontAwesome
                                 name="lock"
                                 color="#05375a"
@@ -186,6 +217,10 @@ const SignUpScreen = function ({}) {
                             <TextInput
                                 placeholder="Your Password"
                                 className={styles.textInput}
+                                style={{
+                                    paddingLeft: 10,
+                                    marginTop: Platform.OS === "ios" ? 0 : -12,
+                                }}
                                 secureTextEntry={
                                     data.confirmPassword ? true : false
                                 }
@@ -212,11 +247,17 @@ const SignUpScreen = function ({}) {
                                 )}
                             </TouchableOpacity>
                         </View>
-                        <View className={styles.textPrivate}>
+                        <View
+                            className={styles.textPrivate}
+                            style={{ flexWrap: "wrap", marginTop: 20 }}
+                        >
                             <Text className={styles.colorTextPrivate}>
                                 By signing up you agree to our
                             </Text>
-                            <Text className={styles.textPrivate}>
+                            <Text
+                                className={styles.textPrivate}
+                                style={{ flexWrap: "wrap", marginTop: 20 }}
+                            >
                                 {" "}
                                 Terms of service
                             </Text>

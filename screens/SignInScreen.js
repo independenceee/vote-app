@@ -17,11 +17,11 @@ import TypeWriter from "react-native-typewriter";
 
 const styles = {
     container: `flex-1 bg-[#009387] `,
-    header: `flex-1 justify-end p-5 t.pB12`,
+    header: `flex-1 justify-end`,
     headerText: `text-[#fff] font-bold text-[30px]`,
     footer: `flex-[3] bg-[#fff] rounded-tl-[30px] rounded-tr-[30px]`,
     footerText: `text-[#05375a] text-[18px]`,
-    action: `flex-row mt-[10px] border-b-[#f2f2f2] pb-[5px]`,
+    action: `flex-row`,
     actionError: `flex-row mt-[10px] border-b-w-[1px] border-b-[#FF0000] pb-[5px]`,
     textInput: `flex-1 mt-[${
         Platform.OS === "ios" ? 0 : -12
@@ -114,9 +114,12 @@ const SignInScreen = function () {
         <SafeAreaView className={styles.container}>
             <View className={styles.container}>
                 <StatusBar backgroundColor="#009387" barStyle="light-content" />
-                <View className={styles.header}>
+                <View
+                    className={styles.header}
+                    style={{ paddingHorizontal: 20, paddingBottom: 50 }}
+                >
                     <Text className={styles.headerText}>
-                        <TypeWriter>Welcome !</TypeWriter>
+                        <TypeWriter typing={1}>Welcome !</TypeWriter>
                     </Text>
                 </View>
                 <Animatable.View
@@ -128,7 +131,15 @@ const SignInScreen = function () {
                     className={styles.footer}
                 >
                     <Text className={styles.footerText}>Gmail</Text>
-                    <View className={styles.action}>
+                    <View
+                        className={styles.action}
+                        style={{
+                            marginTop: 10,
+                            borderBottomWidth: 1,
+                            borderBottomColor: "#f2f2f2",
+                            paddingBottom: 5,
+                        }}
+                    >
                         <FontAwesome
                             name="user-o"
                             color={colors.text}
@@ -165,7 +176,15 @@ const SignInScreen = function () {
                         </Animatable.View>
                     )}
                     <Text className={styles.footerText}>Password</Text>
-                    <View className={styles.action}>
+                    <View
+                        className={styles.action}
+                        style={{
+                            marginTop: 10,
+                            borderBottomWidth: 1,
+                            borderBottomColor: "#f2f2f2",
+                            paddingBottom: 5,
+                        }}
+                    >
                         <Feather name="lock" color={colors.text} size={20} />
                         <TextInput
                             placeholder="Your Password"
