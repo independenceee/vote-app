@@ -5,7 +5,6 @@ import {
     TouchableOpacity,
     TextInput,
     Platform,
-    StyleSheet,
     StatusBar,
     Alert,
     SafeAreaView,
@@ -14,6 +13,7 @@ import * as Animatable from "react-native-animatable";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Feather from "react-native-vector-icons/Feather";
 import { useNavigation, useTheme } from "@react-navigation/native";
+import TypeWriter from "react-native-typewriter";
 
 const styles = {
     container: `flex-1 bg-[#009387] `,
@@ -115,7 +115,9 @@ const SignInScreen = function () {
             <View className={styles.container}>
                 <StatusBar backgroundColor="#009387" barStyle="light-content" />
                 <View className={styles.header}>
-                    <Text className={styles.headerText}>Welcome!</Text>
+                    <Text className={styles.headerText}>
+                        <TypeWriter>Welcome !</TypeWriter>
+                    </Text>
                 </View>
                 <Animatable.View
                     animation="fadeInUpBig"
