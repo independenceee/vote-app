@@ -2,9 +2,7 @@ import Reac, { useState, useLayoutEffect } from "react";
 import {
     View,
     Text,
-    Button,
     TouchableOpacity,
-    Dimensions,
     TextInput,
     Platform,
     ScrollView,
@@ -16,21 +14,24 @@ import { useNavigation } from "@react-navigation/native";
 import * as Animatable from "react-native-animatable";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Feather from "react-native-vector-icons/Feather";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 const styles = {
     container: `flex-1 bg-[#009387]`,
     header: `flex-1 justify-end `,
     headerText: `text-[#fff] font-bold text-[30px]`,
     footer: `bg-[#fff] rounded-tl-[30px] rounded-tr-[30px] flex-[${
-        Platform.OS === "ios" ? 3 : 5
-    }] `,
+        Platform.OS === "ios" ? 3 : 3
+    }]`,
     footerText: `text-[#05375a] text-[18px]`,
     action: `flex-row`,
     textInput: `flex-1 mt-[${Platform.OS == "ios" ? 0 : -12}px] text-[#05375a]`,
     button: `items-center mt-[50px]`,
     signIn: `w-[100%] h-[50px] justify-center items-center rounded-[10px]`,
-    textSign: `text-[18px] font-bold`,
-    textPrivate: `flex-row mt-[20px] flex-wrap`,
+    signUp: `w-[100%] h-[50px] justify-center items-center rounded-[10px] bg-[#01ab9d] `,
+    textSign: `text-[18px] font-bold  text-[#01ab9d]`,
+    textSignUp: `text-[18px] font-bold text-[#fff]`,
+    textPrivate: `flex-row`,
     colorTextPrivate: `text-grey`,
 };
 
@@ -153,6 +154,44 @@ const SignUpScreen = function ({}) {
                                 </Animatable.View>
                             ) : null}
                         </View>
+
+                        <Text className={styles.footerText}>Email</Text>
+                        <View
+                            className={styles.action}
+                            style={{
+                                marginTop: 10,
+                                borderBottomWidth: 1,
+                                borderBottomColor: "#f2f2f2",
+                                paddingBottom: 5,
+                            }}
+                        >
+                            <MaterialCommunityIcons
+                                name="gmail"
+                                color="#05375a"
+                                size={20}
+                            />
+                            <TextInput
+                                placeholder="Your Gmail"
+                                className={styles.textInput}
+                                style={{
+                                    paddingLeft: 10,
+                                    marginTop: Platform.OS === "ios" ? 0 : -12,
+                                }}
+                                autoCapitalize="none"
+                                onChangeText={(val) =>
+                                    handleTextInputChange(val)
+                                }
+                            />
+                            {data.checkTextInputChange ? (
+                                <Animatable.View animation="bounceIn">
+                                    <Feather
+                                        name="check-circle"
+                                        color="green"
+                                        size={20}
+                                    />
+                                </Animatable.View>
+                            ) : null}
+                        </View>
                         <Text className={styles.footerText}>Password</Text>
                         <View
                             className={styles.action}
@@ -232,7 +271,7 @@ const SignUpScreen = function ({}) {
                             <TouchableOpacity
                                 onPress={updateConfirmSecureTextEntry}
                             >
-                                {data.secureTextEntry ? (
+                                {data.confirmTextEntry ? (
                                     <Feather
                                         name="eye-off"
                                         color="grey"
@@ -254,10 +293,7 @@ const SignUpScreen = function ({}) {
                             <Text className={styles.colorTextPrivate}>
                                 By signing up you agree to our
                             </Text>
-                            <Text
-                                className={styles.textPrivate}
-                                style={{ flexWrap: "wrap", marginTop: 20 }}
-                            >
+                            <Text className={styles.colorTextPrivate}>
                                 {" "}
                                 Terms of service
                             </Text>
@@ -266,17 +302,19 @@ const SignUpScreen = function ({}) {
                                 and
                             </Text>
                             <Text className={styles.colorTextPrivate}>
-                                {" "}
                                 Privacy policy
                             </Text>
                         </View>
                         <View className={styles.button}>
                             <TouchableOpacity
-                                className={styles.signIn}
+                                className={styles.signUp}
                                 onPress={() => {}}
                             >
-                                <View className={styles.signIn}>
-                                    <Text className={styles.textSign}>
+                                <View className={styles.signUp}>
+                                    <Text
+                                        className={styles.textSignUp}
+                                        style={{ color: "#fff" }}
+                                    >
                                         Sign Up
                                     </Text>
                                 </View>
@@ -284,6 +322,11 @@ const SignUpScreen = function ({}) {
                             <TouchableOpacity
                                 onPress={() => navigation.goBack()}
                                 className={styles.signIn}
+                                style={{
+                                    borderColor: "#009387",
+                                    borderWidth: 1,
+                                    marginTop: 15,
+                                }}
                             >
                                 <Text className={styles.textSign}>Sign In</Text>
                             </TouchableOpacity>

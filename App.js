@@ -3,13 +3,13 @@ import React from "react";
 import { TailwindProvider } from "tailwindcss-react-native";
 import { NavigationContainer } from "@react-navigation/native";
 
-import RootStackScreen from "./screens/RootStackScreen";
+import PublicScreen from "./screens/public";
 
 const App = function () {
     return (
         <TailwindProvider>
             <NavigationContainer>
-                <RootStackScreen />
+                <PublicScreen />
             </NavigationContainer>
         </TailwindProvider>
     );
